@@ -1,0 +1,10 @@
+#!/home/alchemy/Desktop/Python/Django/IPs/photogram/virtual/bin/python3.6
+# EASY-INSTALL-ENTRY-SCRIPT: 'future==0.16.0','console_scripts','pasteurize'
+__requires__ = 'future==0.16.0'
+import sys
+from pkg_resources import load_entry_point
+
+if __name__ == '__main__':
+    sys.exit(
+        load_entry_point('future==0.16.0', 'console_scripts', 'pasteurize')()
+    )

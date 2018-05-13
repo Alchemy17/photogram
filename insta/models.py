@@ -10,7 +10,7 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
     @classmethod
-    def get_profiles(cls):
+    def get_all(cls):
         profiles = Profile.objects.all()
         return profiles
     
@@ -24,6 +24,10 @@ class Image(models.Model):
 
     def __str__(self):
         return self.caption
+    @classmethod
+    def get_all(cls):
+        imgs = Image.objects.all()
+        return imgs
 
     class Meta:
         ordering = ['-post_date']

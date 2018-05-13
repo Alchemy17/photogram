@@ -1,13 +1,8 @@
 from django import forms
-from .models import Image, Comment
+from .models import Image
 
 
 class ImagePost(forms.ModelForm):
     class Meta:
         model = Image
-        exclude = ['user','profile', 'post_date']
-
-class CommentForm(forms.ModelForm):
-    class Meta:
-        model = Comment
-        exclude = ['user', 'post']
+        exclude = ['user','profile', 'likes', 'post_date']

@@ -57,7 +57,8 @@ def profiles(request, profile_id):
 
 
     profiles = Image.objects.filter(creator__username__iexact=profile_id)
-    profile = Profile.objects.get(user__username__exact=profiles[0].creator.username)
+    print(profiles)
+    profile = Profile.objects.get(user__username__exact=profile_id)
     content = {
         "profiles":profiles,
         "profile":profile,
@@ -74,3 +75,13 @@ def image(request, image_id):
     except ObjectDoesNotExist:
         raise Http404()
     return render(request,"image.html", {"image":image})
+
+
+def explore(request):
+    profiles = Profile.get_all()
+    content = {
+        "profiles":profiles,
+    }
+    return render(request,"explore.html", content)
+
+

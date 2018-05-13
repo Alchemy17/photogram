@@ -5,6 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required(login_url='/accounts/login/')
 def welcome(request):
     images = Image.objects.all()
     profiles = Profile.objects.all()
@@ -14,7 +15,7 @@ def welcome(request):
     }
 
     return render(request, 'index.html', content)
-    
+
 @login_required(login_url='/accounts/login/')
 def profiles(request, profile_id):
 

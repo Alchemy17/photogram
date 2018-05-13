@@ -3,7 +3,7 @@ from django.http  import HttpResponse, Http404, HttpResponse
 from .models import Image, Profile
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
-from .forms import ImagePost
+from .forms import ImagePost, EditProfile
 
 
 # Create your views here.
@@ -84,4 +84,28 @@ def explore(request):
     }
     return render(request,"explore.html", content)
 
+@login_required(login_url='/accounts/register')
+def edit(request):
+    current_user = request.user
+    profile= request.user.profile
+    if request.method == 'POST':
+
+        form = EditProfile(request.POST, request.FILES)
+
+        if form.is_valid:
+            post = form.save(commit=False)
+            post.user = current_user
+            post.profile = profile
+            post.save()
+
+            return redirect('profiles', current_user.username)
+    else:
+        form = EditProfile()
+    
+    title = "New Post"
+    content = {
+        "form":form,
+        "title":title
+    }
+    return render(request,'editProfile.html', content)
 

@@ -10,6 +10,7 @@ urlpatterns=[
     url(r'^image/(\d+)',views.image,name ='image'),
     url('create/',views.post,name ='post'),
     url('explore/',views.explore,name ='explore'),
+    url('edit/',views.edit,name ='edit'),
 ]
 
 if settings.DEBUG:

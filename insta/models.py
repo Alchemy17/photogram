@@ -40,13 +40,8 @@ class Image(models.Model):
         ordering = ['-post_date']
 
 class Comment(models.Model):
-    '''
-    Class that defines a Comment on a Post
-    '''
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-
     post = models.ForeignKey(Image,on_delete=models.CASCADE)
-
     comment_content = models.TextField(blank=True)
 
     def __str__(self):

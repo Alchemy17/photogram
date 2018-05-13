@@ -3,6 +3,7 @@
 {% block content %} 
 
 <div class="container">
+    {% if profile.profile_pic %}
         <div class="row">
                 <div class="col-md-3">
                     <img src="{{profile.profile_pic.url | safe}}" class="img-fluid rounded" alt="">
@@ -16,13 +17,28 @@
                 </div>
             </div>
             </div>
+    {% else %}
+            <div class="row">
+                    <div class="col-md-3">
+                        <img src="https://i0.wp.com/www.thisblogrules.com/wp-content/uploads/2010/02/batman-for-facebook.jpg?resize=250%2C280" class="img-fluid rounded" alt="">
+                    </div>
+                <div class="col-md-9">
+                    <div>
+                        <h5><strong>{{profile.user}}</strong></h5>
+                    </div>
+                    <div>
+                            <button type="button" class="btn btn-outline-primary btn-lg">Edit Your Profile</button>
+                    </div>
+                </div>
+                </div>
+    {% endif %}
 
     
 <div class="row">
         {% if user.username == profile_id %}
 
         <div class="postme col-md-4">
-           <a href="{% url 'post' %}"><img src="{% static 'images/add.png' %}" alt="Lmao"></a> 
+           <a href="{% url 'post' %}"><img src="{% static 'images/add.png' %}" alt="Add Image"></a> 
         </div>
         {%endif%}
         {% for profiles in profiles %}

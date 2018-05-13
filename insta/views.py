@@ -3,7 +3,7 @@ from django.http  import HttpResponse, Http404, HttpResponse
 from .models import Image, Profile
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
-from .forms import NewsPostForm, NewCommentForm
+from .forms import ImagePost
 
 
 # Create your views here.
@@ -30,7 +30,7 @@ def post(request):
     profile= request.user.profile
     if request.method == 'POST':
 
-        form = NewsPostForm(request.POST, request.FILES)
+        form = ImagePost(request.POST, request.FILES)
 
         if form.is_valid:
             post = form.save(commit=False)
@@ -39,10 +39,8 @@ def post(request):
             post.save()
 
             return redirect('profiles', current_user.username)
-
     else:
-
-        form = NewsPostForm()
+        form = ImagePost()
     
     title = "New Post"
     content = {
@@ -58,7 +56,7 @@ def profiles(request, profile_id):
     current_user = request.user
 
 
-    profiles = Image.objects.filter(creator__username__exact=profile_id)
+    profiles = Image.objects.filter(creator__username__iexact=profile_id)
     profile = Profile.objects.get(user__username__exact=profiles[0].creator.username)
     content = {
         "profiles":profiles,

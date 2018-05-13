@@ -7,7 +7,7 @@
     {% for images in images %}
 <div class="this">
   <div class="card mb-3">
-        <div class="card-header">{{images.creator.username}}</div>
+        <a href="{%url 'profiles' images.creator.username %}"><div class="card-header">{{images.creator.username}}</div></a>
         <a href="{%url 'image' images.id%}"><img class="card-img-top img-fluid" src="{{images.image.url}}" alt="Card image cap"></a>
         <div class="card-body">
                 <div class="likes">

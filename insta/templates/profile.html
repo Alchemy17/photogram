@@ -22,18 +22,18 @@
         {% if user.username == profile_id %}
 
         <div class="postme col-md-4">
-            <img src="{% static 'images/add.png' %}" alt="Lmao">
+           <a href="{% url 'post' %}"><img src="{% static 'images/add.png' %}" alt="Lmao"></a> 
         </div>
         {%endif%}
         {% for profiles in profiles %}
     <div class="this1 col-md-4">
   <div class="card mb-3">
-        <img class="card-img-top img-fluid" src="{{profiles.image.url}}" alt="Card image cap">
+        <a href="{%url 'image' profiles.id%}"><img class="card-img-top img-fluid" src="{{profiles.image.url}}" alt="Card image cap"></a>
         <div class="card-body">
                 <div class="likes">
                         <p class="p-3 ml-2"></p>
                       </div>
-          <p class="card-title"><strong><i class="fa fa-heart-o nx"></i> 5{{profiles.likes}} likes</strong></p>
+          <p class="card-title"><strong><i class="fa fa-heart-o nx"></i> {{profiles.likes}} likes</strong></p>
           <p class="card-text">{{profiles.caption}}</p>
           <p class="card-text"><small class="text-muted">Last updated {{profiles.post_date|timesince}} ago</small></p>
         </div>

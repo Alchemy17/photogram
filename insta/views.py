@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from django.http  import HttpResponse
+from django.http  import HttpResponse, Http404, HttpResponse
 from .models import Image, Profile
-from django.http import Http404, HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def welcome(request):
@@ -14,7 +14,8 @@ def welcome(request):
     }
 
     return render(request, 'index.html', content)
-
+    
+@login_required(login_url='/accounts/login/')
 def profiles(request, profile_id):
 
     profiles = Image.objects.filter(creator__username__exact=profile_id)
@@ -26,6 +27,7 @@ def profiles(request, profile_id):
     return render(request,"profile.html", content)
 
 
+@login_required(login_url='/accounts/login/')
 def image(request, image_id):
     try:
         image = Image.objects.get(id = image_id)

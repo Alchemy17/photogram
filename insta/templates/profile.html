@@ -2,23 +2,38 @@
 {% block content %} 
 
 <div class="container">
-{% for profiles in profiles %}
-<div class="this">
+        <div class="row">
+                <div class="col-md-3">
+                    <img src="{{profile.profile_pic.url | safe}}" class="img-fluid rounded" alt="">
+                </div>
+            <div class="col-md-9">
+                <div>
+                    <h5><strong>{{profile.user}}</strong></h5>
+                </div>
+                <div>
+                        <p>{{profile.bio}}</p>
+                </div>
+            </div>
+            </div>
+
+    
+<div class="row">
+        {% for profiles in profiles %}
+    <div class="this1 col-md-4">
   <div class="card mb-3">
-        <div class="card-header">{{profiles.creator.username}}</div>
         <img class="card-img-top img-fluid" src="{{profiles.image.url}}" alt="Card image cap">
         <div class="card-body">
                 <div class="likes">
                         <p class="p-3 ml-2"></p>
                       </div>
-          <p class="card-title"><strong>{{profiles.likes}} likes</strong></p>
+          <p class="card-title"><strong><i class="fa fa-heart-o nx"></i> 5{{profiles.likes}} likes</strong></p>
           <p class="card-text">{{profiles.caption}}</p>
           <p class="card-text"><small class="text-muted">Last updated {{profiles.post_date|timesince}} ago</small></p>
         </div>
       </div>
     </div>
     {% endfor %}
-
+</div>
     </div>
 
 {% endblock %}

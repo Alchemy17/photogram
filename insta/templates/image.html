@@ -1,0 +1,18 @@
+{%extends 'everything/base.html'%}
+{% block content %} 
+
+<div class="container">
+<div class="this card mb-3">
+        <div class="card-header">{{image.creator.username}}</div>
+        <img class="card-img-top img-fluid" src="{{image.image.url}}" alt="Card image cap">
+        <div class="card-body">
+                <div class="likes">
+                        <p class="p-3 ml-2"></p>
+                      </div>
+          <p class="card-title"><strong>{{image.likes}} likes</strong></p>
+          <p class="card-text">{{image.caption}}</p>
+          <p class="card-text"><small class="text-muted">Last updated {{image.post_date|timesince}} ago</small></p>
+        </div>
+      </div>
+    </div>
+{%endblock%}

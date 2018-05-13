@@ -10,4 +10,4 @@ class ImagePost(forms.ModelForm):
 class EditProfile(forms.ModelForm):
     class Meta:
         model = Profile
-        exclude = []
+        exclude = ['user']

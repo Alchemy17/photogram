@@ -33,11 +33,10 @@ def post(request):
         form = ImagePost(request.POST, request.FILES)
 
         if form.is_valid:
-            post = form.save(commit=False)
-            post.user = current_user
-            post.profile = profile
-            post.save()
-
+            image = form.save(commit=False)
+            image.user = current_user
+            image.profile = profile
+            image.save()
             return redirect('profiles', current_user.username)
     else:
         form = ImagePost()
@@ -92,12 +91,9 @@ def edit(request):
 
         form = EditProfile(request.POST, request.FILES)
 
-        if form.is_valid:
-            post = form.save(commit=False)
-            post.user = current_user
-            post.profile = profile
-            post.save()
-
+        if form.is_valid():
+            edit = form.save()
+            edit.save()
             return redirect('profiles', current_user.username)
     else:
         form = EditProfile()

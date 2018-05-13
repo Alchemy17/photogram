@@ -8,6 +8,7 @@ urlpatterns=[
     url('^$',views.welcome,name = 'welcome'),
     url(r'^profiles/(?P<profile_id>[-\w]+)/$', views.profiles, name='profiles'),
     url(r'^image/(\d+)',views.image,name ='image'),
+    url( r'^create/post', views.post, name="new-post"),
 ]
 
 if settings.DEBUG:

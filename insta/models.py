@@ -27,3 +27,31 @@ class Image(models.Model):
 
     class Meta:
         ordering = ['-post_date']
+
+class Comment(models.Model):
+    '''
+    Class that defines a Comment on a Post
+    '''
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+
+    post = models.ForeignKey(Image,on_delete=models.CASCADE)
+
+    comment_content = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.user.username
+
+    @classmethod
+    def get_post_comments(cls,post_id):
+        '''
+        Function that gets all the comments belonging to a single post
+
+        Args:
+            post_id : specific post
+
+        Returns:
+            comments : List of Comment objects for the specified post
+        '''
+        post_comments = Comment.objects.filter(post=post_id)
+
+        return post_comments

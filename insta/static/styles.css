@@ -106,12 +106,18 @@ a {
     height: auto;
     width: 50%;
     margin-left: 150px;
-    margin-top: 2%;
+    margin-top: 5%;
 }
 .this1{
     height: auto;
     width: 50%;
-    margin-top: 2%;
+    margin-top: 5%;
+}
+.postme{
+    height: auto;
+    width: 50%;
+    margin-top: 5%;
+    margin-right: -10%;
 }
 .timestamp {
   font-family: Arial;

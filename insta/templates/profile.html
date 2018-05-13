@@ -1,4 +1,5 @@
 {%extends 'everything/base.html'%}
+{% load static %}
 {% block content %} 
 
 <div class="container">
@@ -18,6 +19,12 @@
 
     
 <div class="row">
+        {% if user.username == profile_id %}
+
+        <div class="postme col-md-4">
+            <img src="{% static 'images/add.png' %}" alt="Lmao">
+        </div>
+        {%endif%}
         {% for profiles in profiles %}
     <div class="this1 col-md-4">
   <div class="card mb-3">

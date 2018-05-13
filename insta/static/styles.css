@@ -20,7 +20,7 @@ a {
 
 #navbar {
   min-width: 500px;
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 25px 0 25px 0;
 }
@@ -39,7 +39,7 @@ a {
 
 #right {
     float: right;
-    width: 200px;
+    width: 300px;
     height: 20px;
 }
 

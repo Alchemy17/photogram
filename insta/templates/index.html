@@ -3,16 +3,22 @@
 
 
   <div class="container">
+
+    {% for images in images %}
 <div class="this">
   <div class="card mb-3">
-        <div class="card-header">Header</div>
-        <img class="card-img-top" src="https://www.hdwallpapers.in/download/bicycle-wide.jpg" alt="Card image cap">
+        <div class="card-header">{{images.creator.username}}</div>
+        <img class="card-img-top img-fluid" src="{{images.image.url}}" alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                <div class="likes">
+                        <p class="p-3 ml-2"></p>
+                      </div>
+          <p class="card-title"><strong>{{images.likes}} likes</strong></p>
+          <p class="card-text">{{images.caption}}</p>
+          <p class="card-text"><small class="text-muted">Last updated {{images.post_date|timesince}} ago</small></p>
         </div>
       </div>
     </div>
+    {% endfor %}
 </div>
       {% endblock %}

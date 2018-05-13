@@ -1,0 +1,24 @@
+{%extends 'everything/base.html'%}
+{% block content %} 
+
+<div class="container">
+{% for profiles in profiles %}
+<div class="this">
+  <div class="card mb-3">
+        <div class="card-header">{{profiles.creator.username}}</div>
+        <img class="card-img-top img-fluid" src="{{profiles.image.url}}" alt="Card image cap">
+        <div class="card-body">
+                <div class="likes">
+                        <p class="p-3 ml-2"></p>
+                      </div>
+          <p class="card-title"><strong>{{profiles.likes}} likes</strong></p>
+          <p class="card-text">{{profiles.caption}}</p>
+          <p class="card-text"><small class="text-muted">Last updated {{profiles.post_date|timesince}} ago</small></p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+    </div>
+
+{% endblock %}

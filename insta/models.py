@@ -20,7 +20,9 @@ class Image(models.Model):
     likes = models.PositiveIntegerField(default=0)
     post_date = models.DateTimeField(auto_now_add=True)
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.caption
 
     class Meta:
         ordering = ['-post_date']

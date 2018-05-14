@@ -5,6 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from .forms import ImagePost, EditProfile, CommentForm
 from django.contrib.auth.models import User
+from django.views.decorators.http import require_POST
 
 
 # Create your views here.
@@ -165,13 +166,25 @@ def like(request):
 
     return HttpResponseRedirect('/')
 
-
+@require_POST
 def addComment(request):
-    form = CommentForm(request.POST)
 
+    profile= request.user.profile
 
+    form = CommentForm(request.POST, instance=profile)
+
+    if form.is_valid():
+        current_user = request.user
+        profile = form.save(commit=False)
+        profile.user = request.user
+        profile.user.post = request.user.post
+        profile.save()
+
+        return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+    print(request.POST['comment_content'])
 
     if request.META['HTTP_REFERER']:
-        return HttpResponseRedirect(request.META['HTTP_REFERER'], {"user_liked": user_liked})
+        return HttpResponseRedirect(request.META['HTTP_REFERER'], {"form": form})
 
     

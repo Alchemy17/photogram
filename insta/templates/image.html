@@ -18,7 +18,7 @@
         <span><a class="user-comment" href="{%url 'profiles' comments.user.username %}">{{comments.user.username}}</a> {{comments.comment_content}}</span>
         {%endfor%}
         <div class="Instagram-card-footer">
-          <form action="" method="POST">
+          <form action="{% url 'add' %}" method="POST">
             {% csrf_token %}
             {{form.comment_content}}
           </form>

@@ -34,6 +34,7 @@ class Image(models.Model):
     post_date = models.DateTimeField(auto_now_add=True)
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
+    users_liked = models.ManyToManyField(User, related_name="user_liked")
 
     def __str__(self):
         return self.caption
@@ -60,7 +61,5 @@ class Comment(models.Model):
 
     @classmethod
     def get_post_comments(cls,post_id):
-
         post_comments = Comment.objects.filter(post=post_id)
-
         return post_comments

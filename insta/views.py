@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http  import HttpResponse, Http404, HttpResponse
+from django.http  import HttpResponse, Http404, HttpResponse, HttpResponseRedirect
 from .models import Image, Profile
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
@@ -126,9 +126,19 @@ def search_results(request):
 @login_required(login_url='/accounts/register')
 def like(request):
 
-    #  if request.GET.has_key('id'):
-    #     try:
-    #         id = request.GET['id']
-    #         post = Image.objects.get(id=id)
-
-    pass
+     if request.GET.has_key('id'):
+        try:
+            id = request.GET['id']
+            post = Image.objects.get(id=id)
+            user_liked = post.users_liked.filter(username=request.user.username)
+            if not user_liked:
+                post.likes += 1
+                post.users_liked.add(request.user)
+                post.save()
+        except ObjectDoesNotExist:
+            raise Http404('Post not found.')
+        
+     if request.META.has_key('HTTP_REFERER'):
+         return HttpResponseRedirect(request.META['HTTP_REFERER'])
+    
+     return HttpResponseRedirect('/')

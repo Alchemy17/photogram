@@ -167,18 +167,26 @@ def like(request):
     return HttpResponseRedirect('/')
 
 @require_POST
-def addComment(request):
+@login_required(login_url='/accounts/register')
+def addComment(request,id):
 
     profile= request.user.profile
 
-    form = CommentForm(request.POST, instance=profile)
+    form = CommentForm(request.POST)
 
     if form.is_valid():
-        current_user = request.user
-        profile = form.save(commit=False)
-        profile.user = request.user
-        profile.user.post = request.user.post
-        profile.save()
+        try:
+            current_user = request.user
+            current_post = Image.objects.get(id=id)
+            new_comment = request.POST['comment_content']
+            profile = form.save(commit=False)
+            profile.user = current_user
+            profile.post = current_post
+            profile.comment_content = new_comment
+            profile.save()
+
+        except ObjectDoesNotExist:
+            raise Http404('Post not found.')
 
         return HttpResponseRedirect(request.META['HTTP_REFERER'])
 

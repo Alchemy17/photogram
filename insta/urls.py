@@ -13,7 +13,7 @@ urlpatterns=[
     url('edit/',views.edit,name ='edit'),
     url(r'^search/', views.search_results, name='search_results'),
     url(r'^vote/$', views.like, name='like'),
-    url(r'^add/$', views.addComment, name='add'),
+    url(r'^add/(\d+)', views.addComment, name='add'),
 ]
 
 if settings.DEBUG:

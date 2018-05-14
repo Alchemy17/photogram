@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http  import HttpResponse, Http404, HttpResponse, HttpResponseRedirect
-from .models import Image, Profile
+from .models import Image, Profile, Comment
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from .forms import ImagePost, EditProfile
@@ -72,9 +72,15 @@ def profiles(request, profile_id):
 def image(request, image_id):
     try:
         image = Image.objects.get(id = image_id)
+        comment = Comment.get_post_comments(image_id)
     except ObjectDoesNotExist:
         raise Http404()
-    return render(request,"image.html", {"image":image})
+
+    content = {
+        "image":image,
+        "comment":comment,
+    }
+    return render(request,"image.html", content)
 
 
 def explore(request):

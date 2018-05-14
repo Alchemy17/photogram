@@ -127,3 +127,24 @@ a {
   margin-right: 15px;
 }
 
+/* instagram card footer */
+
+.Instagram-card-footer{
+  padding: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.footer-action-icons{
+  font-size: 16px;
+  color: #ccc;
+}
+
+.comments-input{
+  border: none;
+  margin-left: 10px;
+  width: 100%;
+}
+.user-comment{
+  color: #003569;
+}

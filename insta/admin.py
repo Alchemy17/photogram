@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Image, Profile
+from .models import Image, Profile, Comment
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
@@ -26,3 +26,4 @@ admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
 admin.site.register(Image)
 admin.site.register(Profile)
+admin.site.register(Comment)

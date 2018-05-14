@@ -10,9 +10,16 @@
                         <p class="p-3 ml-2"></p>
                       </div>
           <p class="card-title"><strong>{{image.likes}} likes</strong></p>
-          <p class="card-text">{{image.caption}}</p>
+          <p class="card-text">{{image.caption}}</p>        </div>
+        {% for comments in comment %}
+        <p class="comments">View {{comment|length}} comments</p>
+        <br><a class="user-comment" href="{%url 'profiles' comments.user.username %}">{{comments.user.username}}</a>{{comments.comment_content}}</br>
+        {%endfor%}
+        <div class="Instagram-card-footer">
+            <input class="comments-input" type="text" placeholder="Insert Comment"/>
+            <a class="footer-action-icons"href="#"><i class="fa fa-ellipsis-h"></i></a>
+          </div>
           <p class="card-text"><small class="text-muted">Last updated {{image.post_date|timesince}} ago</small></p>
-        </div>
       </div>
     </div>
 {%endblock%}

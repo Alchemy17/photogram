@@ -125,8 +125,17 @@ def search_results(request):
     
 @login_required(login_url='/accounts/register')
 def like(request):
+    '''
+    The view starts by looking for a GET variable called id. If it finds one, it retrieves the
+    Image object that is associated with this id.
 
-     if request.GET.has_key('id'):
+    Next, the view checks to see whether the user has voted for this bookmark before.
+    This is done by calling the filter method.
+
+    If this is the first time that the user has liked for this bookmark, we increment the
+    post.likes
+    '''
+    if request.GET['id']:
         try:
             id = request.GET['id']
             post = Image.objects.get(id=id)
@@ -134,11 +143,16 @@ def like(request):
             if not user_liked:
                 post.likes += 1
                 post.users_liked.add(request.user)
+                post.save() 
+            
+            elif user_liked and post.likes != 0:
+                post.likes -= 1
+                post.users_liked.remove(request.user)
                 post.save()
         except ObjectDoesNotExist:
             raise Http404('Post not found.')
-        
-     if request.META.has_key('HTTP_REFERER'):
-         return HttpResponseRedirect(request.META['HTTP_REFERER'])
     
-     return HttpResponseRedirect('/')
+    if request.META['HTTP_REFERER']:
+        return HttpResponseRedirect(request.META['HTTP_REFERER'], {"user_liked": user_liked})
+
+    return HttpResponseRedirect('/')

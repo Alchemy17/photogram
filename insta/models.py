@@ -60,15 +60,7 @@ class Comment(models.Model):
 
     @classmethod
     def get_post_comments(cls,post_id):
-        '''
-        Function that gets all the comments belonging to a single post
 
-        Args:
-            post_id : specific post
-
-        Returns:
-            comments : List of Comment objects for the specified post
-        '''
         post_comments = Comment.objects.filter(post=post_id)
 
         return post_comments

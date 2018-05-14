@@ -1,0 +1,40 @@
+{%extends 'everything/base.html'%} 
+{% block content %}
+<div class="jumbotron">
+<h1 style="color: black;">Search Results</h1>
+</div>
+<div class="container">
+
+    <div id="all">
+  <div class="row">
+    {% if photos%}
+      <h2>Found {{ photos|length }} of searched term {{message}}</h2>
+    {% else %}
+      <h2> Found 0 articles for the search term {{message}}</h2>
+    {% endif %}
+</div>
+</div>
+
+  <div class="row">
+        {% if photos %}
+        {% for photos in photos %}
+    <div class="this1 col-md-4">
+  <div class="card mb-3">
+        <a href="{%url 'profiles' photos.creator.username %}"><div class="list-group-item-action card-header">{{photos.creator.username}}</div></a>
+        <a href="{%url 'image' photos.id%}"><img class="card-img-top img-fluid" src="{{photos.image.url}}" alt="Card image cap"></a>
+        <div class="card-body">
+                <div class="likes">
+                        <p class="p-3 ml-2"></p>
+                      </div>
+          <p class="card-title"><strong><i class="fa fa-heart-o nx"></i> {{photos.likes}} likes</strong></p>
+          <p class="card-text">{{photos.caption}}</p>
+          <p class="card-text"><small class="text-muted">Last updated {{photos.post_date|timesince}} ago</small></p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+
+
+{% endblock %}

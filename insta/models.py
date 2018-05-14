@@ -15,6 +15,12 @@ class Profile(models.Model):
     def get_all(cls):
         profiles = Profile.objects.all()
         return profiles
+
+    @classmethod
+    def searched(cls, query):
+        result = cls.objects.filter(user__username__icontains=query).first()   
+        return result
+
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
     if created:
@@ -35,6 +41,11 @@ class Image(models.Model):
     def get_all(cls):
         imgs = Image.objects.all()
         return imgs
+
+    @classmethod
+    def get_Image_by_profile(cls,profile):
+        images = cls.objects.filter(profile=profile).all()
+        return images
 
     class Meta:
         ordering = ['-post_date']

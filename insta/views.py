@@ -4,6 +4,7 @@ from .models import Image, Profile
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from .forms import ImagePost, EditProfile
+from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -85,15 +86,18 @@ def explore(request):
 
 @login_required(login_url='/accounts/register')
 def edit(request):
-    current_user = request.user
+    
     profile= request.user.profile
+
     if request.method == 'POST':
 
-        form = EditProfile(request.POST, request.FILES)
+        form = EditProfile(request.POST, request.FILES, instance=profile)
 
         if form.is_valid():
-            edit = form.save()
-            edit.save()
+            current_user = request.user
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
             return redirect('profiles', current_user.username)
     else:
         form = EditProfile()
@@ -105,3 +109,26 @@ def edit(request):
     }
     return render(request,'editProfile.html', content)
 
+def search_results(request):
+
+    if 'photos' in request.GET and request.GET["photos"]:
+        search_term = request.GET.get("photos")
+        searched_images = Profile.searched(search_term)
+        images= Image.get_Image_by_profile(searched_images)
+        message = f"{search_term}"
+
+        return render(request, 'search.html',{"message":message,"photos": images})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'search.html',{"message":message})
+    
+@login_required(login_url='/accounts/register')
+def like(request):
+
+    #  if request.GET.has_key('id'):
+    #     try:
+    #         id = request.GET['id']
+    #         post = Image.objects.get(id=id)
+
+    pass

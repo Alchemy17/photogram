@@ -11,6 +11,8 @@ urlpatterns=[
     url('create/',views.post,name ='post'),
     url('explore/',views.explore,name ='explore'),
     url('edit/',views.edit,name ='edit'),
+    url(r'^search/', views.search_results, name='search_results'),
+    url(r'^vote/$', views.like, name='like'),
 ]
 
 if settings.DEBUG:

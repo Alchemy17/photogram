@@ -3,7 +3,7 @@ from django.http  import HttpResponse, Http404, HttpResponse, HttpResponseRedire
 from .models import Image, Profile, Comment
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
-from .forms import ImagePost, EditProfile
+from .forms import ImagePost, EditProfile, CommentForm
 from django.contrib.auth.models import User
 
 
@@ -73,12 +73,14 @@ def image(request, image_id):
     try:
         image = Image.objects.get(id = image_id)
         comment = Comment.get_post_comments(image_id)
+        form = CommentForm()
     except ObjectDoesNotExist:
         raise Http404()
 
     content = {
         "image":image,
         "comment":comment,
+        "form": form
     }
     return render(request,"image.html", content)
 

@@ -147,4 +147,15 @@ a {
 }
 .user-comment{
   color: #003569;
+  margin-left: 2%;
+}
+
+.Instagram-card-content-user{
+  font-weight: bold;
+  color: #262626;
+}
+
+.comments{
+  color:#999;
+  margin-left: 2%;
 }

@@ -15,4 +15,8 @@ class EditProfile(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        exclude = ['user', 'post'] 
+        fields = ('comment_content',)
+        widgets = {
+            'comment_content': forms.TextInput(attrs={
+                'class': u'comments-input form-control', 'placeholder': u'Insert Comment'})
+        } 

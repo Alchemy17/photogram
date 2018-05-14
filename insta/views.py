@@ -164,3 +164,14 @@ def like(request):
         return HttpResponseRedirect(request.META['HTTP_REFERER'], {"user_liked": user_liked})
 
     return HttpResponseRedirect('/')
+
+
+def addComment(request):
+    form = CommentForm(request.POST)
+
+
+
+    if request.META['HTTP_REFERER']:
+        return HttpResponseRedirect(request.META['HTTP_REFERER'], {"user_liked": user_liked})
+
+    

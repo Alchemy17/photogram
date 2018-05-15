@@ -43,7 +43,7 @@
         {% if user.username == profile_id %}
 
         <div class="postme col-md-4">
-           <a href="{% url 'post' %}"><img src="{% static 'images/add.png' %}" alt="Add Image"></a> 
+           <a href="{% url 'post' %}"><img src="{% static 'images/add.png' %}"  class="img-fluid" alt="Add Image"></a> 
         </div>
         {%endif%}
         {% for profiles in profiles %}

@@ -15,7 +15,7 @@
         
         <p class="comments">View {{comment|length}} comments</p>
         {% for comments in comment %}
-        <span><a class="user-comment" href="{%url 'profiles' comments.user.username %}">{{comments.user.username}}</a> {{comments.comment_content}}<i class="spaceme fas fa-trash-alt"></i>
+        <span><a class="user-comment" href="{%url 'profiles' comments.user.username %}">{{comments.user.username}}</a> {{comments.comment_content}} {% if current_user.username == comments.user.username %}<a href="{%url 'deleteComment' comments.id%}"><i class="spaceme fas fa-trash-alt"></i></a>{%endif%}
 
         </span>
         {%endfor%}

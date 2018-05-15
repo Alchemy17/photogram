@@ -15,6 +15,7 @@ urlpatterns=[
     url(r'^vote/$', views.like, name='like'),
     url(r'^add/(\d+)', views.addComment, name='add'),
     url(r'^deletePost/(\d+)', views.deletePost, name='delete'),
+    url(r'^deleteComment/(\d+)', views.deleteComment, name='deleteComment'),
 
 ]
 

@@ -72,6 +72,7 @@ def profiles(request, profile_id):
 
 @login_required(login_url='/accounts/login/')
 def image(request, image_id):
+    current_user = request.user
     try:
         image = Image.objects.get(id = image_id)
         comment = Comment.get_post_comments(image_id)
@@ -82,7 +83,8 @@ def image(request, image_id):
     content = {
         "image":image,
         "comment":comment,
-        "form": form
+        "form": form,
+        "current_user": current_user
     }
     return render(request,"image.html", content)
 
@@ -175,7 +177,7 @@ def addComment(request,id):
     profile= request.user.profile
 
     form = CommentForm(request.POST)
-
+    current_user = request.user
     if form.is_valid():
         try:
             current_user = request.user
@@ -192,14 +194,20 @@ def addComment(request,id):
 
         return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
-    print(request.POST['comment_content'])
 
     if request.META['HTTP_REFERER']:
-        return HttpResponseRedirect(request.META['HTTP_REFERER'], {"form": form})
+        return HttpResponseRedirect(request.META['HTTP_REFERER'], {"form": form, "current_user":current_user})
 
 
 def deletePost(request,id):
     post = Image.objects.get(id=id).delete()
+    current_user = request.user
+
+    if request.META['HTTP_REFERER']:
+        return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+def deleteComment(request,id):
+    post = Comment.objects.get(id=id).delete()
     current_user = request.user
 
     if request.META['HTTP_REFERER']:

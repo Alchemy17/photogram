@@ -3,13 +3,13 @@
 
 <div class="container">
 <div class="this card mb-3">
-        <div class="card-header">{{image.creator.username}}</div>
+        <div class="card-header"><a href="{%url 'profiles' image.creator.username %}">{{image.creator.username}}</a></div>
         <img class="card-img-top img-fluid" src="{{image.image.url}}" alt="Card image cap">
         <div class="card-body">
                 <div class="likes">
                         <p class="p-3 ml-2"></p>
                       </div>
-          <p class="card-title"><strong><a href="/vote/?id={{ image.id }}"><i class="fa fa-heart-o nx"></i></a>  {{image.likes}} likes</strong></p>
+          <p class="card-title"><strong><a href="/vote/?id={{ image.id }}"><i class="fas fa-heart"></i></a>  {{image.likes}} likes</strong></p>
           <p class="Instagram-card-content-user card-text">{{image.caption}}</p>
         </div>
         

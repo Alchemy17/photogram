@@ -186,7 +186,7 @@ def addComment(request,id):
             profile.save()
 
         except ObjectDoesNotExist:
-            raise Http404('Post not found.')
+            raise Http404('Comment not found.')
 
         return HttpResponseRedirect(request.META['HTTP_REFERER'])
 

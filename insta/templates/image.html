@@ -15,7 +15,9 @@
         
         <p class="comments">View {{comment|length}} comments</p>
         {% for comments in comment %}
-        <span><a class="user-comment" href="{%url 'profiles' comments.user.username %}">{{comments.user.username}}</a> {{comments.comment_content}}</span>
+        <span><a class="user-comment" href="{%url 'profiles' comments.user.username %}">{{comments.user.username}}</a> {{comments.comment_content}}<i class="spaceme fas fa-trash-alt"></i>
+
+        </span>
         {%endfor%}
         <div class="Instagram-card-footer">
           <form action="{% url 'add' image.id %}" method="POST">

@@ -37,6 +37,7 @@ def post(request):
         if form.is_valid:
             image = form.save(commit=False)
             image.user = current_user
+            image.creator = current_user
             image.profile = profile
             image.save()
             return redirect('profiles', current_user.username)
@@ -153,11 +154,12 @@ def like(request):
                 post.likes += 1
                 post.users_liked.add(request.user)
                 post.save() 
-            
+
             elif user_liked and post.likes != 0:
                 post.likes -= 1
                 post.users_liked.remove(request.user)
                 post.save()
+
         except ObjectDoesNotExist:
             raise Http404('Post not found.')
     
@@ -195,4 +197,10 @@ def addComment(request,id):
     if request.META['HTTP_REFERER']:
         return HttpResponseRedirect(request.META['HTTP_REFERER'], {"form": form})
 
-    
+
+def deletePost(request,id):
+    post = Image.objects.get(id=id).delete()
+    current_user = request.user
+
+    if request.META['HTTP_REFERER']:
+        return HttpResponseRedirect(request.META['HTTP_REFERER'])

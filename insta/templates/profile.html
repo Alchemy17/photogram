@@ -55,11 +55,14 @@
                         <p class="p-3 ml-2"></p>
                       </div>
           <p class="card-title"><strong><i class="fas fa-heart"></i> {{profiles.likes}} likes</strong></p>
-          <p class="card-text">{{profiles.caption}}</p>
+          <p class="card-text">{{profiles.caption}}</p>{% if user.username == profile_id %}<a href="{%url 'delete' profiles.id%}"><i class="fas fa-trash-alt"></i></a>{%endif%}<br><br>
           <p class="card-text"><small class="text-muted">Last updated {{profiles.post_date|timesince}} ago</small></p>
         </div>
       </div>
     </div>
+    {% empty %}
+
+    <h4 style="margin-left: 400px; margin-top: 4%; font-weight: 20px;" class="list-group-item">No image posted. Yet.</h4>
     {% endfor %}
 </div>
     </div>

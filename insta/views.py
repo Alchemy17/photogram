@@ -138,10 +138,10 @@ def like(request):
     The view starts by looking for a GET variable called id. If it finds one, it retrieves the
     Image object that is associated with this id.
 
-    Next, the view checks to see whether the user has voted for this bookmark before.
+    Next, the view checks to see whether the user has voted for this image before.
     This is done by calling the filter method.
 
-    If this is the first time that the user has liked for this bookmark, we increment the
+    If this is the first time that the user has liked for this image, we increment the
     post.likes
     '''
     if request.GET['id']:

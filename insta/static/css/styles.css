@@ -9,6 +9,10 @@ a {
   text-decoration: none;
   color: black;
 }
+a:hover {
+  text-decoration: none;
+  color: black;
+}
 
 #nav-container {
   width: 100%;

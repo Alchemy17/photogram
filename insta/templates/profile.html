@@ -15,9 +15,11 @@
                 <div>
                         <p>{{profile.bio}}</p>
                 </div>
+                {% if user.username == profile_id %}
                 <div>
                     <a href="{% url 'edit'%}"><button type="button" class="btn btn-outline-primary btn-lg">Edit Your Profile</button></a>
                 </div>
+                {%endif%}
             </div>
             </div>
     {% else %}

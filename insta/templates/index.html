@@ -13,7 +13,7 @@
                 <div class="likes">
                         <p class="p-3 ml-2"></p>
                       </div>
-          <p class="card-title"><strong> {% if  user.username == user_liked.user.username %}  <a href="/vote/?id={{ images.id }}"><i class="fas fa-heart"></i> {%else%} HAH {%endif%} </a> {{images.likes}} likes</strong></p>
+          <p class="card-title"><strong><a href="/vote/?id={{ images.id }}"><i class="fas fa-heart"></i> {{images.likes}} likes</strong></p>
           <p class="card-text">{{images.caption}}</p>
           <p class="card-text"><small class="text-muted">Last updated {{images.post_date|timesince}} ago</small></p>
         </div>

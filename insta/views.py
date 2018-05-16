@@ -14,13 +14,15 @@ from django.views.decorators.http import require_POST
 def welcome(request):
 
     current_user = request.user
-
     images = Image.objects.all()
+    print(images)
+    user_liked = images[0].users_liked.filter(username=request.user.username)
     profiles = Profile.objects.all()
     content = {
         "images": images,
         "profiles": profiles,
-        "user": current_user
+        "user": current_user,
+        "user_liked":user_liked
     }
     
 

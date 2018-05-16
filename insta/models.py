@@ -9,6 +9,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,  related_name='profile')
     bio = models.TextField(blank=True)
     profile_pic = models.ImageField(upload_to="profile/", blank=True)
+    following = models.ManyToManyField(User, blank=True, related_name='followed_by')
     def __str__(self):
         return self.user.username
     @classmethod

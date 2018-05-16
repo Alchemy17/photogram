@@ -67,4 +67,14 @@
 </div>
     </div>
 
+
+    <h1>Following</h1>
+    {{all_profile.following.all}}
+    {% for user in all_profile.following.all %}
+    {{user.username}}
+    {%empty%}
+    <h4>Nothing bruv</h4>
+    {% endfor %}
+
+
 {% endblock %}

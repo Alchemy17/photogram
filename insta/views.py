@@ -63,11 +63,13 @@ def profiles(request, profile_id):
     profiles = Image.objects.filter(creator__username__iexact=profile_id)
     print(profiles)
     profile = Profile.objects.get(user__username__exact=profile_id)
+    all_profile = Profile.objects.all()
     content = {
         "profiles":profiles,
         "profile":profile,
         "user": current_user,
-        "profile_id": profile_id
+        "profile_id": profile_id,
+        "all_profile": all_profile
     }
     return render(request,"profile.html", content)
 

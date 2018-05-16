@@ -1,6 +1,6 @@
 # APP NAME
 
-### Instagram Clone
+### Not Instagram Clone
 
 ## AUTHOR
 
@@ -8,8 +8,8 @@ Abdulrahman Mohamed
 
 ## DESCRIPTION
 
-This is an application that is just nothing like the popular social media platform Instagram where users can sign up, post pictures
-view pictures posted by others and comment on them as well as like or dislike the pictures
+This is an application that is just nothing like the popular social media platform Instagram where users can sign up, post pictures,
+view pictures posted by others, comment on them and like/dislike the pictures.
 
 
 ## User stories
